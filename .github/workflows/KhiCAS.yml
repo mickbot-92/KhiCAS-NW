@@ -7,10 +7,9 @@ on:
 
 jobs:
   KhiCAS:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04-arm
     steps:
       - name: Get KhiCAS
-        run: |
-          wget -qO- https://www-fourier.univ-grenoble-alpes.fr/~parisse/numworks/khiext.tgz | tar -xz
-          ls -l ./khiext/
-          cat ./khiext/README.MD
+        run: wget -qO- https://www-fourier.univ-grenoble-alpes.fr/~parisse/numworks/khiext.tgz | tar -xz
+      - name: Build KhiCAS
+        run: cd khiext && make
