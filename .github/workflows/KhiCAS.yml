@@ -1,0 +1,15 @@
+name: KhiCAS Build
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  KhiCAS:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get KhiCAS
+        run: |
+          wget -qO- https://www-fourier.univ-grenoble-alpes.fr/~parisse/numworks/khiext.tgz | tar -xz
+          ls -l
