@@ -13,3 +13,4 @@ jobs:
         run: |
           wget -qO- https://www-fourier.univ-grenoble-alpes.fr/~parisse/numworks/khiext.tgz | tar -xz
           ls -l ./khiext/
+          cat ./khiext/README.MD
