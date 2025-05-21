@@ -9,6 +9,8 @@ jobs:
   KhiCAS:
     runs-on: ubuntu-24.04-arm
     steps:
+      - name: Install dependencies
+        run: sudo apt install gcc-arm-none-eabi
       - name: Get KhiCAS
         run: wget -qO- https://www-fourier.univ-grenoble-alpes.fr/~parisse/numworks/khiext.tgz | tar -xz
       - name: Build KhiCAS
