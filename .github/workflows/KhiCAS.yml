@@ -10,14 +10,8 @@ jobs:
     runs-on: ubuntu-24.04-arm
     steps:
       - name: Install dependencies
-        run: sudo apt install gcc-arm-none-eabi
+        run: sudo apt install gcc-arm-none-eabi libtool=2.4.6-15
       - name: Get KhiCAS
         run: wget -qO- https://www-fourier.univ-grenoble-alpes.fr/~parisse/numworks/khiext.tgz | tar -xz
-      - name: Regenerate Build Files
-        run: |
-          cd khiext
-          libtoolize --force --copy
-          aclocal
-          autoconf
       - name: Build KhiCAS
         run: cd khiext && make
