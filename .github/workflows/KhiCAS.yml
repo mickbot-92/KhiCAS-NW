@@ -7,7 +7,7 @@ on:
 
 jobs:
   KhiCAS:
-    runs-on: ubuntu-24.04-arm
+    runs-on: ubuntu-22.04-arm
     steps:
       - name: Install dependencies
         run: apt list --all-versions libtool && sudo apt install gcc-arm-none-eabi libtool=2.4.6-15
