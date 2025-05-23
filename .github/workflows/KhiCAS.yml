@@ -16,5 +16,12 @@ jobs:
           sudo apt-get install build-essential git imagemagick libx11-dev libxext-dev libfreetype6-dev libpng-dev libjpeg-dev pkg-config gcc-arm-none-eabi binutils-arm-none-eabi
       - name: Get KhiCAS
         run: wget -qO- https://www-fourier.univ-grenoble-alpes.fr/~parisse/numworks/khiext.tgz | tar -xz
+      - name: Fix libtool
+        run: |
+          cd ./khiext/apps/KhiCAS/src/mpfi-1.5.4/
+          aclocal
+          autoconf
+          automake --add-missing
+          ./configure
       - name: Build KhiCAS
         run: cd khiext && make
