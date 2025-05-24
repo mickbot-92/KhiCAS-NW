@@ -25,4 +25,8 @@ jobs:
           automake --add-missing
           ./configure
       - name: Build KhiCAS
-        run: cd ./khiext/apps/KhiCAS/ && make -j2 && ls -l
+        run: |
+          cd khiext
+          make -C apps/KhiCAS -j2
+          cat apps/KhiCAS/src/gmp-6.2.1/config.log
+          ls -l apps/KhiCAS
