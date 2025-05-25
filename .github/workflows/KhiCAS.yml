@@ -7,26 +7,24 @@ on:
 
 jobs:
   KhiCAS:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04-arm
     steps:
       - name: Install dependencies
         run: |
-          sudo apt update
+          #sudo apt update
           #sudo apt-get install gdb libmpfr-dev libmpfi-dev libpari-dev libgsl0-dev libxext-dev libpng-dev libjpeg-dev libreadline-dev mesa-common-dev libx11-dev libxt-dev libxft-dev libntl-dev libgl1-mesa-dev libgl-dev libao-dev hevea debhelper libfltk1.3-dev gcc-arm-none-eabi
           #sudo apt-get install build-essential git imagemagick libx11-dev libxext-dev libfreetype6-dev libpng-dev libjpeg-dev pkg-config gcc-arm-none-eabi binutils-arm-none-eabi
-          sudo apt-get install libmpfr-dev gcc-arm-none-eabi build-essential
-      - name: Get KhiCAS
+          sudo apt-get install gcc-arm-none-eabi
+      - name: Get KhiCAS source code
         run: wget -qO- https://www-fourier.univ-grenoble-alpes.fr/~parisse/numworks/khiext.tgz | tar -xz
-      - name: Fix libtool
+      - name: Copy already-built dependencies
         run: |
-          cd ./khiext/apps/KhiCAS/src/mpfi-1.5.4/
-          aclocal
-          autoconf
-          automake --add-missing
-          ./configure
+          cd khiext/apps/KhiCAS/src
+          cp gmp-6.2.1/.libs/libgmp.a mpfr-4.1.0/src/.libs/libmpfr.a mpfi-1.5.4/src/.libs/libmpfi.a micropython-1.12/numworks/libmicropy.a lib
+          cp gmp-6.2.1/gmp.h mpfr-4.1.0/src/mpfr.h mpfi-1.5.4/src/mpfi.h include
       - name: Build KhiCAS
         run: |
           cd khiext
-          make -C apps/KhiCAS -j2
-          cat apps/KhiCAS/src/gmp-6.2.1/config.log
+          make -C api
+          make -C apps/KhiCAS
           ls -l apps/KhiCAS
